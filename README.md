@@ -14,7 +14,7 @@ NetWatch is a high-performance, real-time network packet sniffer and traffic ana
 
 ## 🛠️ Tech Stack
 - **Backend:** C++17, Winsock2 (Networking), Npcap SDK (Packet Sniffing).
-- **Frontend:** HTML5, CSS3 (Custom Cyber-theme), Vanilla JavaScript (ES6).
+- **Frontend:** HTML5, CSS3 (Custom Cyber-theme), JavaScript (ES6).
 - **API:** Custom lightweight HTTP REST API (running on port 8080).
 
 ## 📋 Prerequisites
