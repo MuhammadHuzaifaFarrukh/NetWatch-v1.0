@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>NetWatch — Network Traffic Monitor</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<!-- ── HEADER ─────────────────────────────────────────────────── -->
+<header>
+  <div class="logo">
+    <span class="logo-icon">◈</span>
+    <span class="logo-text">NET<strong>WATCH</strong></span>
+    <span class="logo-sub">Traffic Monitor v1.0</span>
+  </div>
+  <div class="header-status">
+    <span class="status-dot" id="statusDot"></span>
+    <span id="statusText">IDLE</span>
+  </div>
+</header>
+
+<!-- ── DEVICE + CONTROLS ──────────────────────────────────────── -->
+<section class="controls-bar">
+  <div class="device-select-wrap">
+    <label>INTERFACE</label>
+    <select id="deviceSelect">
+      <option value="">— Loading devices… —</option>
+    </select>
+  </div>
+  <div class="btn-group">
+    <button class="btn btn-start" id="btnStart" onclick="startCapture()">
+      <span class="btn-icon">▶</span> START
+    </button>
+    <button class="btn btn-stop" id="btnStop" onclick="stopCapture()" disabled>
+      <span class="btn-icon">■</span> STOP
+    </button>
+    <button class="btn btn-clear" onclick="clearData()">
+      <span class="btn-icon">⟳</span> CLEAR
+    </button>
+  </div>
+</section>
+
+<!-- ── STATS CARDS ────────────────────────────────────────────── -->
+<section class="stats-grid">
+  <div class="stat-card">
+    <div class="stat-label">TOTAL PACKETS</div>
+    <div class="stat-value" id="statTotal">0</div>
+  </div>
+  <div class="stat-card tcp">
+    <div class="stat-label">TCP</div>
+    <div class="stat-value" id="statTCP">0</div>
+  </div>
+  <div class="stat-card udp">
+    <div class="stat-label">UDP</div>
+    <div class="stat-value" id="statUDP">0</div>
+  </div>
+  <div class="stat-card icmp">
+    <div class="stat-label">ICMP</div>
+    <div class="stat-value" id="statICMP">0</div>
+  </div>
+  <div class="stat-card other">
+    <div class="stat-label">OTHER</div>
+    <div class="stat-value" id="statOther">0</div>
+  </div>
+  <div class="stat-card avg">
+    <div class="stat-label">AVG SIZE (bytes)</div>
+    <div class="stat-value" id="statAvg">0</div>
+  </div>
+</section>
+
+<!-- ── FILTERS ────────────────────────────────────────────────── -->
+<section class="filter-bar">
+  <div class="filter-title">◈ FILTERS</div>
+  <div class="filter-fields">
+    <div class="filter-field">
+      <label>PROTOCOL</label>
+      <select id="fProto">
+        <option value="">ALL</option>
+        <option value="TCP">TCP</option>
+        <option value="UDP">UDP</option>
+        <option value="ICMP">ICMP</option>
+        <option value="OTHER">OTHER</option>
+      </select>
+    </div>
+    <div class="filter-field">
+      <label>SOURCE IP</label>
+      <input type="text" id="fSrcIP" placeholder="e.g. 192.168.1.1"/>
+    </div>
+    <div class="filter-field">
+      <label>DESTINATION IP</label>
+      <input type="text" id="fDstIP" placeholder="e.g. 8.8.8.8"/>
+    </div>
+    <div class="filter-field">
+      <label>SERVICE</label>
+      <input type="text" id="fService" placeholder="e.g. HTTP"/>
+    </div>
+    <div class="filter-btns">
+      <button class="btn btn-filter" onclick="applyFilter()">APPLY</button>
+      <button class="btn btn-reset"  onclick="resetFilter()">RESET</button>
+    </div>
+  </div>
+</section>
+
+<!-- ── PACKET TABLE ───────────────────────────────────────────── -->
+<section class="table-section">
+  <div class="table-header">
+    <span class="table-title">◈ PACKET LOG</span>
+    <span class="table-count">Showing <strong id="shownCount">0</strong> / <strong id="totalCount">0</strong> packets</span>
+  </div>
+  <div class="table-wrap">
+    <table id="packetTable">
+      <thead>
+        <tr>
+          <th>TIME</th>
+          <th>SOURCE IP</th>
+          <th>DESTINATION IP</th>
+          <th>PROTOCOL</th>
+          <th>SRC PORT</th>
+          <th>DST PORT</th>
+          <th>SERVICE</th>
+          <th>SIZE (B)</th>
+        </tr>
+      </thead>
+      <tbody id="packetBody">
+        <tr class="empty-row">
+          <td colspan="8">No packets captured yet. Select an interface and press START.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ── LOG CONSOLE ────────────────────────────────────────────── -->
+<section class="log-section">
+  <div class="log-header">
+    <span class="table-title">◈ SYSTEM LOG</span>
+    <button class="btn-small" onclick="clearLog()">CLEAR LOG</button>
+  </div>
+  <div class="log-console" id="logConsole">
+    <div class="log-line info">[SYSTEM] NetWatch initialized. Waiting for capture…</div>
+  </div>
+</section>
+
+<script src="app.js"></script>
+</body>
+</html>
