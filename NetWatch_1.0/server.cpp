@@ -185,12 +185,6 @@ void packetHandler(u_char *, const struct pcap_pkthdr *header, const u_char *pkt
     g_total_packets++;
     g_proto_count[rec.protocol]++;
     g_total_size += rec.packet_size;
-
-    // Keep only last 500 packets in memory
-    if (g_packets.size() > 500)
-    {
-        g_packets.erase(g_packets.begin());
-    }
 }
 
 // ─── Capture Thread ───────────────────────────────────────────────────────────
