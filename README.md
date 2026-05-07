@@ -5,6 +5,8 @@ NetWatch is a high-performance, real-time network packet sniffer and traffic ana
 
 
 ## 🚀 Features
+
+- **Data-Set Packet Capturing:** Capture packets from a .csv file.
 - **Real-time Sniffing:** Live packet capture using the Npcap/libpcap driver.
 - **Protocol Decoding:** Deep packet inspection for Ethernet, IPv4, TCP, UDP, and ICMP.
 - **Service Mapping:** Automatically identifies applications (HTTP, HTTPS, DNS, SSH, etc.) based on port numbers.
